@@ -1,42 +1,47 @@
 // リンクデータの設定
 const links = [
     {
-        title: 'GitHub',
-        description: 'コードリポジトリ',
-        url: 'https://github.com/deckeye',
-        icon: '🔗'
+        title: 'X (@jumbo_hakodate)',
+        description: 'Jumbo HakodateのXアカウント',
+        url: 'https://x.com/jumbo_hakodate',
+        icon: '🐦',
+        qrCode: true
     },
     {
-        title: 'Twitter',
-        description: 'Twitterアカウント',
-        url: 'https://twitter.com',
-        icon: '🐦'
+        title: 'X (@b_lab_hakodate)',
+        description: 'B Lab HakodateのXアカウント',
+        url: 'https://x.com/b_lab_hakodate',
+        icon: '🐦',
+        qrCode: true
     },
     {
-        title: 'LinkedIn',
-        description: 'LinkedInプロフィール',
-        url: 'https://linkedin.com',
-        icon: '💼'
+        title: 'X (@mirai_base)',
+        description: 'Mirai BaseのXアカウント',
+        url: 'https://x.com/mirai_base',
+        icon: '🐦',
+        qrCode: true
     },
     {
-        title: 'Portfolio',
-        description: 'ポートフォリオサイト',
-        url: '#',
-        icon: '📁'
+        title: 'Instagram',
+        description: 'ロボラボ函館のInstagram',
+        url: 'https://www.instagram.com/robora_lab_hakodate/',
+        icon: '📷',
+        qrCode: true
     },
     {
-        title: 'Blog',
-        description: 'ブログ',
-        url: '#',
-        icon: '📝'
-    },
-    {
-        title: 'Email',
-        description: 'お問い合わせ',
-        url: 'mailto:your-email@example.com',
-        icon: '✉️'
+        title: '公式WEBサイト',
+        description: 'Hakolab公式サイト',
+        url: 'https://hakolab.co.jp',
+        icon: '🌐',
+        qrCode: true
     }
 ];
+
+// QRコードを生成する関数（QRコードAPIを使用）
+function generateQRCode(url, size = 150) {
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(url)}`;
+    return qrApiUrl;
+}
 
 // リンクカードを生成する関数
 function createLinkCard(link) {
@@ -46,10 +51,20 @@ function createLinkCard(link) {
     card.target = '_blank';
     card.rel = 'noopener noreferrer';
     
+    let qrCodeHtml = '';
+    if (link.qrCode) {
+        qrCodeHtml = `
+            <div class="qr-code-container">
+                <img src="${generateQRCode(link.url)}" alt="QR Code" class="qr-code" />
+            </div>
+        `;
+    }
+    
     card.innerHTML = `
         <div class="link-icon">${link.icon}</div>
         <h3 class="link-title">${link.title}</h3>
         <p class="link-description">${link.description}</p>
+        ${qrCodeHtml}
     `;
     
     return card;
