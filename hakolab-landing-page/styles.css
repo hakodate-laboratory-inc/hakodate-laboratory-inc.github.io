@@ -3,25 +3,3 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-/* QR Code */
-.qr-code-container {
-    margin-top: 16px;
-    padding: 12px;
-    background: var(--bg-secondary);
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.qr-code {
-    width: 120px;
-    height: 120px;
-    border-radius: 4px;
-    transition: var(--transition);
-}
-
-.link-card:hover .qr-code {
-    transform: scale(1.05);
-}
